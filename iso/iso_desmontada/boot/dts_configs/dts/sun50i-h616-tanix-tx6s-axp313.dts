@@ -1,0 +1,458 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+// Copyright (C) 2020 Arm Ltd.
+// based on the H6 dtsi, which is:
+//   Copyright (C) 2017 Icenowy Zheng <icenowy@aosc.io>
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/clock/sun50i-h616-ccu.h>
+#include <dt-bindings/clock/sun50i-h6-r-ccu.h>
+#include <dt-bindings/clock/sun6i-rtc.h>
+#include <dt-bindings/reset/sun50i-h616-ccu.h>
+#include <dt-bindings/reset/sun50i-h6-r-ccu.h>
+#include <dt-bindings/thermal/thermal.h>
+
+#include "sun50i-h616.dtsi" // incluindo o generico
+
+/ {
+	interrupt-parent = <&gic>;
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+		};
+
+		cpu1: cpu@1 {
+		};
+
+		cpu2: cpu@2 {
+		};
+
+		cpu3: cpu@3 {
+		};
+
+		l2_cache: l2-cache {
+		};
+	};
+
+	reserved-memory {
+		};
+	};
+
+	osc24M: osc24M-clk {
+	};
+
+	pmu {
+	};
+
+	psci {
+	};
+
+	timer {
+	};
+
+	soc {
+
+		gpu: gpu@1800000 {
+			status = "okay";
+		};
+
+		crypto: crypto@1904000 {
+		};
+
+		syscon: syscon@3000000 {
+			sram_c: sram@28000 {
+			};
+		};
+
+		ccu: clock@3001000 {
+		};
+
+		dma: dma-controller@3002000 {
+		};
+
+		sid: efuse@3006000 {
+			ths_calibration: thermal-sensor-calibration@14 {
+			};
+
+			cpu_speed_grade: cpu-speed-grade@0 {
+			};
+		};
+
+		watchdog: watchdog@30090a0 {
+		};
+
+		pio: pinctrl@300b000 {
+			ext_rgmii_pins: rgmii-pins {
+				pins = "PI0", "PI1", "PI2", "PI3", "PI4",
+				       "PI5", "PI7", "PI8", "PI9", "PI10",
+				       "PI11", "PI12", "PI13", "PI14", "PI15",
+				       "PI16";
+				function = "emac0";
+				drive-strength = <40>;
+			};
+
+			i2c0_pins: i2c0-pins {
+
+			};
+
+			i2c3_ph_pins: i2c3-ph-pins {
+
+			};
+
+			ir_rx_pin: ir-rx-pin {
+
+			};
+
+			mmc0_pins: mmc0-pins {
+				pins = "PF0", "PF1", "PF2", "PF3",
+				       "PF4", "PF5";
+				function = "mmc0";
+				drive-strength = <30>;
+				bias-pull-up;
+			};
+
+			/omit-if-no-ref/
+			mmc1_pins: mmc1-pins {
+				pins = "PG0", "PG1", "PG2", "PG3",
+				       "PG4", "PG5";
+				function = "mmc1";
+				drive-strength = <30>;
+				bias-pull-up;
+			};
+
+			mmc2_pins: mmc2-pins {
+				pins = "PC0", "PC1", "PC5", "PC6",
+				       "PC8", "PC9", "PC10", "PC11",
+				       "PC13", "PC14", "PC15", "PC16";
+				function = "mmc2";
+				drive-strength = <30>;
+				bias-pull-up;
+			};
+
+			/omit-if-no-ref/
+			spi0_pins: spi0-pins {
+				pins = "PC0", "PC2", "PC4";
+				function = "spi0";
+			};
+
+			/omit-if-no-ref/
+			spi0_cs0_pin: spi0-cs0-pin {
+				pins = "PC3";
+				function = "spi0";
+			};
+
+			/omit-if-no-ref/
+			spi1_pins: spi1-pins {
+				pins = "PH6", "PH7", "PH8";
+				function = "spi1";
+			};
+
+			/omit-if-no-ref/
+			spi1_cs0_pin: spi1-cs0-pin {
+				pins = "PH5";
+				function = "spi1";
+			};
+
+			spdif_tx_pin: spdif-tx-pin {
+				pins = "PH4";
+				function = "spdif";
+			};
+
+			uart0_ph_pins: uart0-ph-pins {
+
+			};
+
+			/omit-if-no-ref/
+			uart1_pins: uart1-pins {
+
+			};
+
+			/omit-if-no-ref/
+			uart1_rts_cts_pins: uart1-rts-cts-pins {
+
+			};
+
+			/omit-if-no-ref/
+			x32clk_fanout_pin: x32clk-fanout-pin {
+
+			};
+		};
+
+		gic: interrupt-controller@3021000 {
+
+		};
+
+		iommu: iommu@30f0000 {
+
+		};
+
+		mmc0: mmc@4020000 {
+			status = "okay";
+			vmmc-supply = <&dcdc1>;
+			broken-cd;
+			bus-width = <0x04>;
+
+		};
+
+		mmc1: mmc@4021000 {
+			status = "okay";
+		};
+
+		mmc2: mmc@4022000 {
+			// memoria interna
+			status = "okay";
+
+
+		};
+
+		uart0: serial@5000000 {
+			status = "okay";
+		};
+
+		uart1: serial@5000400 {
+			status = "okay";
+		};
+
+		uart2: serial@5000800 {
+			status = "okay";
+		};
+
+		uart3: serial@5000c00 {
+			status = "okay";
+		};
+
+		uart4: serial@5001000 {
+			status = "okay";
+		};
+
+		uart5: serial@5001400 {
+			status = "okay";
+		};
+
+		i2c0: i2c@5002000 {
+			status = "okay";
+		};
+
+		i2c1: i2c@5002400 {
+			status = "okay";
+		};
+
+		i2c2: i2c@5002800 {
+			status = "okay";
+		};
+
+		i2c3: i2c@5002c00 {
+			status = "okay";
+		};
+
+		i2c4: i2c@5003000 {
+			status = "okay";
+		};
+
+		spi0: spi@5010000 {
+			status = "okay";
+		};
+
+		spi1: spi@5011000 {
+			status = "okay";
+		};
+
+		emac0: ethernet@5020000 {
+			status = "okay";
+
+			mdio0: mdio {
+
+			};
+		};
+
+		gpadc: adc@5070000 {
+			status = "okay";
+		};
+
+		ths: thermal-sensor@5070400 {
+		};
+
+		lradc: lradc@5070800 {
+			status = "okay";
+		};
+
+		spdif: spdif@5093000 {
+			status = "okay";
+		};
+
+		codec: codec@5096000 {
+			status = "okay";
+		};
+
+		usbotg: usb@5100000 {
+			status = "okay";
+		};
+
+		usbphy: phy@5100400 {
+			status = "okay";
+		};
+
+		ehci0: usb@5101000 {
+			status = "okay";
+		};
+
+		ohci0: usb@5101400 {
+			status = "okay";
+		};
+
+		ehci1: usb@5200000 {
+			status = "okay";
+		};
+
+		ohci1: usb@5200400 {
+			status = "okay";
+		};
+
+		ehci2: usb@5310000 {
+			status = "okay";
+		};
+
+		ohci2: usb@5310400 {
+			status = "okay";
+		};
+
+		ehci3: usb@5311000 {
+			status = "okay";
+		};
+
+		ohci3: usb@5311400 {
+			status = "okay";
+		};
+
+		rtc: rtc@7000000 {
+
+		};
+
+		r_ccu: clock@7010000 {
+
+		};
+
+		prcm_ppu: power-controller@7010250 {
+			compatible = "allwinner,sun50i-h616-prcm-ppu";
+			reg = <0x07010250 0x10>;
+			#power-domain-cells = <1>;
+		};
+
+		nmi_intc: interrupt-controller@7010320 {
+
+		};
+
+		r_pio: pinctrl@7022000 {
+
+			/omit-if-no-ref/
+			r_i2c_pins: r-i2c-pins {
+
+			};
+
+			r_rsb_pins: r-rsb-pins {
+
+			};
+		};
+
+		ir: ir@7040000 {
+
+			status = "okay";
+		};
+
+		r_i2c: i2c@7081400 {
+			status = "okay";
+
+			axp313a: pmic@36 {
+				compatible = "x-powers,axp313a";
+				reg = <0x36>;
+				regulators {
+					axp313a_dcdc1: dcdc1 {
+						regulator-always-on;
+						regulator-min-microvolt = <1800000>; // 1.8V
+						regulator-max-microvolt = <1800000>;
+						regulator-name = "vdd-emmc";
+					};
+
+					axp313a_dcdc2: dcdc2 {
+						regulator-always-on;
+						regulator-min-microvolt = <3300000>; // 3.3V
+						regulator-max-microvolt = <3300000>;
+						regulator-name = "vcc-emmc";
+					};
+
+					axp313a_dcdc3: dcdc3 {
+						regulator-always-on;
+						regulator-min-microvolt = <1200000>; // 1.2V
+						regulator-max-microvolt = <1200000>;
+						regulator-name = "vdd-core";
+					};
+
+					axp313a_aldo1: aldo1 {
+						regulator-always-on;
+						regulator-min-microvolt = <1800000>; // 1.8V
+						regulator-max-microvolt = <1800000>;
+						regulator-name = "vcc1v8";
+					};
+
+					axp313a_dldo1: dldo1 {
+						regulator-always-on;
+						regulator-min-microvolt = <0x325aa0>;
+						regulator-max-microvolt = <0x325aa0>;
+						regulator-name = "vcc3v3";
+					};
+				};
+			}
+
+		r_rsb: rsb@7083000 {
+			status = "okay";
+		};
+	};
+
+	thermal-zones {
+		cpu-thermal {
+
+			trips {
+				cpu_threshold: cpu-trip-0 {
+
+				};
+				cpu_target: cpu-trip-1 {
+
+				};
+				cpu_critical: cpu-trip-2 {
+
+				};
+			};
+		};
+
+		gpu-thermal {
+
+			trips {
+				gpu_temp_critical: gpu-trip-0 {
+
+				};
+			};
+		};
+
+		ve-thermal {
+
+			trips {
+				ve_temp_critical: ve-trip-0 {
+
+				};
+			};
+		};
+
+		ddr-thermal {
+
+			trips {
+				ddr_temp_critical: ddr-trip-0 {
+
+				};
+			};
+		};
+	};
+};

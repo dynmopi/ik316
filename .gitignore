@@ -1,5 +1,11 @@
 # iso
-iso/*  
-!iso/iso_desmontada/boot/dts_configs
+iso/*
+!iso/iso_desmontada/
+!iso/iso_desmontada/boot/
+!iso/iso_desmontada/boot/dts_configs/
+
+iso/iso_desmontada/*
+!iso/iso_desmontada/boot/
+
 iso_do_android
 
