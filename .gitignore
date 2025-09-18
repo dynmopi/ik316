@@ -6,6 +6,7 @@ iso/*
 
 iso/iso_desmontada/*
 !iso/iso_desmontada/boot/
+!iso/iso_desmontada/boot/dts_configs/
 
 iso_do_android
 
