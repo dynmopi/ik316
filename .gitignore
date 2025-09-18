@@ -1,2 +1,5 @@
 # iso
-iso/
+iso/*  
+!iso/boot/dts_configs
+iso_do_android
+
